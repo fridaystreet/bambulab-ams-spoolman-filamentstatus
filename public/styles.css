@@ -1,0 +1,141 @@
+/* Basis-Stil für den Light Mode */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #f4f4f4; /* Helle Hintergrundfarbe */
+  color: #333; /* Dunkle Schriftfarbe */
+  transition: background-color 0.3s, color 0.3s; /* Sanfter Übergang */
+}
+
+h1 {
+  text-align: center;
+}
+
+#status {
+  margin: 20px 0;
+}
+
+#status p {
+  font-size: 16px;
+}
+
+/* Tabellenstil */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table th, table td {
+  border: 1px solid #ccc; /* Gitterlinien */
+  padding: 10px;
+  text-align: left;
+  transition: background-color 0.3s, color 0.3s; /* Sanfter Übergang */
+}
+
+table th {
+  background-color: #eee; /* Helle Kopfzeilenfarbe */
+  color: #333; /* Dunkle Schriftfarbe */
+}
+
+/* Zellen mit Farb-Codes sollen nicht beeinflusst werden */
+table td.color-cell {
+  background-color: transparent !important; /* Keine Veränderung der Hintergrundfarbe */
+  color: inherit !important; /* Keine Veränderung der Textfarbe */
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+  background-color: #1e1e1e; /* Dunkle Hintergrundfarbe */
+  color: #f1f1f1; /* Helle Schriftfarbe */
+}
+
+table th {
+  background-color: #eee; /* Standard-Kopfzeilenfarbe */
+  color: #333;
+}
+
+body.dark-mode table {
+  background-color: #2e2e2e; /* Dunkle Tabellenfarbe */
+}
+
+body.dark-mode table th {
+  background-color: #444; /* Dunkelgrauer Hintergrund */
+  color: #ccc; /* Hellgraue Schriftfarbe */
+  border: 1px solid #555; /* Passender Rahmen */
+}
+
+body.dark-mode table td {
+  background-color: #333; /* Dunkle Zellenfarbe */
+  border: 1px solid #555; /* Dunkelgraue Gitterlinien */
+}
+
+/* Dialog - Light Mode */
+dialog {
+  background-color: #f4f4f4; /* Gleiche Hintergrundfarbe wie der Body im Light Mode */
+  color: #333; /* Gleiche Schriftfarbe wie der Body im Light Mode */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  max-width: 800px;
+  text-align: left;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, color 0.3s; /* Sanfter Übergang */
+}
+
+dialog h3 {
+  margin-top: 0;
+}
+
+dialog button {
+  margin-top: 20px;
+}
+
+/* Dialog - Dark Mode */
+body.dark-mode dialog {
+  background-color: #1e1e1e; /* Dunkle Hintergrundfarbe */
+  color: #f1f1f1; /* Helle Schriftfarbe */
+  border: 1px solid #555; /* Dunkler Rahmen */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.6); /* Dunklerer Schatten */
+}
+
+/* Button-Container */
+.button-container {
+  display: flex;
+  justify-content: center; /* Zentriert die Buttons horizontal */
+  gap: 20px; /* Fügt eine Lücke von 20px zwischen den Buttons hinzu */
+  margin-top: 10px; /* Optional: Platz über den Buttons */
+}
+
+/* Button-Stil anpassen, damit sie die gleiche Schriftart wie die Tabelle verwenden */
+button, .btn {
+  font-family: Arial, sans-serif; /* Die gleiche Schriftart wie die Tabelle */
+  font-size: 14px; /* Gleiche Schriftgröße wie in der Tabelle */
+}
+
+#log-box {
+  margin-top: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+body.dark-mode #log-box {
+  background-color: #2e2e2e; /* Dunkler Hintergrund für Dark Mode */
+  border: 1px solid #555; /* Dunkler Rahmen */
+  color: #f1f1f1; /* Helle Schriftfarbe */
+}
+
+#logs {
+  font-family: monospace;
+  font-size: 14px;
+  color: #333;
+}
+
+body.dark-mode #logs {
+  color: #ccc; /* Hellere Schriftfarbe für bessere Lesbarkeit im Dark Mode */
+}
