@@ -4,6 +4,7 @@ import got from "got";
 import { config } from "dotenv";
 import cors from "cors";
 import path from "path";
+import ping from "ping";
 
 // loading .env
 config();
@@ -31,6 +32,9 @@ const MODE = process.env.MODE || "manual";
 // Configuration to show logs in WEB UI
 const SHOW_LOGS_WEB = process.env.SHOW_LOGS_WEB || "false";
 
+const RECONNECT_INTERVAL = 60000; // Intervall for try to reconnect once in a minute
+const PING_INTERVAL = 5000; // Intervall for ping printer every 5 seconds to be sure if its online
+
 // save original console.log
 const originalConsoleLog = console.log;
 
@@ -48,6 +52,8 @@ let mqttStatus = "Disconnected";
 let spoolmanStatus = "Disconnected";
 let lastMqttAmsUpdate = null;
 let lastMqttUpdate = null;
+ 
+let mqttRunning = false; // Status, ob MQTT aktiv läuft
 
 // This vars load Data for processing
 let lastAmsData = null;
@@ -478,18 +484,28 @@ function formatDate(date) {
 // Main function for requesting Bambu Lab Printers MQTT Data and prcess it
 async function setupMqtt() {
     try {
-                
+        
+        console.log("Setting up MQTT connection...");
+        
         // Connect to the MQTT broker using TLS
         const client = await mqtt.connectAsync(`tls://bblp:${PRINTER_CODE}@${PRINTER_IP}:8883`, {
             rejectUnauthorized: false,  // Accept self-signed certificates
+            keepalive: 3600,
         });
 
         mqttStatus = "Connected";  // Set the MQTT status
+        mqttRunning = true;
         console.log("MQTT client connected");
 
         // Subscribe to the MQTT topic for reports
         await client.subscribe(`device/${PRINTER_ID}/report`);
         console.log(`Subscribed to device/${PRINTER_ID}/report`);
+        
+        client.on("close", () => {
+            console.log("MQTT connection closed");
+            mqttStatus = "Disconnected";
+            mqttRunning = false;
+        });
 
         // Listen for incoming messages
         client.on("message", async (topic, message) => {
@@ -695,38 +711,50 @@ async function setupMqtt() {
 
     } catch (error) {
         mqttStatus = "Error";
+        mqttRunning = false;
         console.error(`Error in setupMqtt: ${error}`);
     }
 }
 
+// Starting method for Script with initial process
 async function starting() {
-    
     try {
-        // Check the health of the Spoolman API
         const spoolmanHealthApi = await got(`http://${SPOOLMAN_IP}:${SPOOLMAN_PORT}/api/v1/health`);
         const spoolmanHealth = JSON.parse(spoolmanHealthApi.body);
 
-        // Set Spoolman status if the API reports a healthy state
-        if (spoolmanHealth.status == "healthy") {
+        if (spoolmanHealth.status === "healthy") {
             spoolmanStatus = "Connected";
             console.log("Spoolman connection: true");
 
-            // Attempt to configure vendor and extra field in Spoolman
+            // Vendor und extraField prüfen
             if (await checkAndSetVendor() && await checkAndSetExtraField()) {
-                console.log("");
                 console.log(`Backend running on http://localhost:${PORT}`);
-                setupMqtt(); // Initialize MQTT for message communication
+                // MQTT einrichten
+                setInterval(pingPrinterAndReconnect, PING_INTERVAL);
+                setupMqtt(); // Erste Initialisierung von MQTT
             } else {
-                console.error(
-                    `Error on starting service: Vendor or Extra Field "tag" could not be read or created in Spoolman!`
-                );
+                console.error(`Error: Vendor or Extra Field "tag" could not be set!`);
             }
         } else {
-            // Log an error if the Spoolman API is not healthy
             console.error("Spoolman connection could not be established");
         }
     } catch (error) {
-        console.log(error)
+        console.error("Error starting the service:", error);
+    }
+}
+
+// This keeps the script running even if the printer gets offline.
+async function pingPrinterAndReconnect() {
+    const isAlive = await ping.promise.probe(PRINTER_IP);
+    if (isAlive.alive) {
+        if (!mqttRunning) {
+            console.log("MQTT not running, attempting to reconnect...");
+            setupMqtt();
+        }
+    } else {
+        console.warn(`Printer:${PRINTER_ID} with IP ${PRINTER_IP} is unreachable. Retrying in ${RECONNECT_INTERVAL / 1000}s...`);
+        mqttStatus = "Disconnected";
+        mqttRunning = false;
     }
 }
 
