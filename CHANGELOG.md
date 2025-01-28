@@ -1,5 +1,5 @@
 -----------------------------------------------------------------------------------------------
-Version 1.0.1-Dev
+Version 1.0.1
    - Add footer to Main Menu
    - Remove "Support for..." and "For AMS" from color field
    - Changed data display behavior in Main Menu
