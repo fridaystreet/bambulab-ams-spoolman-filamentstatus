@@ -1,6 +1,6 @@
 # Bambulab AMS Spoolman Filament Status
 
-This project integrates a Bambulab AMS system with Spoolman to synchronize filament spool usage. It listens for MQTT updates from the printer and manages spools on Spoolman.
+This project integrates Bambu Lab Printers with one or multiple AMS with Spoolman to synchronize filament spool usage. It listens for MQTT updates from the printers and manages spools on Spoolman.
 
 Please note that these data represent rough estimates communicated by the AMS!
 
@@ -8,7 +8,9 @@ This project is based on the idea of a script from [Diogo Resende](https://githu
 
 
 ## !! Attention !!
-This Solution only Works on Bambu Lab AMS Systems for the P and X Series. The AMS Lite is not supported because it only shows 100% or 0% left on the Spool: [#Issue 4](https://github.com/Rdiger-36/bambulab-ams-spoolman-filamentstatus/issues/4#issuecomment-2550571529)
+This Solution only Works on Bambu Lab Printers with AMS for the P and X Series. The AMS Lite is not supported on updating Spools on Spoolman because it only shows 100% or 0% left on the Spool ([#Issue 4](https://github.com/Rdiger-36/bambulab-ams-spoolman-filamentstatus/issues/4#issuecomment-2550571529)).
+However it can be used to Create Spools and Filaments on Spoolman and connect thier serials with it.
+
 
 
 ## Features
@@ -17,15 +19,15 @@ This Solution only Works on Bambu Lab AMS Systems for the P and X Series. The AM
 - Multiple Printer Support
 - Synchronizes spool usage with Spoolman
 - Lightweight Docker container for easy deployment
-- Web UI for manually merge or create Spools with collected data
-- Automatic Mode for automatically merge or create Spools with collected data
+- Web UI for manually merge or create Spools and Filaments with collected data
+- Automatic Mode for automatically merge or create Spools and Filaments with collected data
 
 ## Getting Started
 
 ### Prerequisites
 
 - A running instance of Spoolman
-- Access to your Bambulab AMS printer with its **serial number**, **access code**, and **IP address**
+- Access to your Bambu Lab printers with its **serial number**, **access code**, and **IP address**
 - Turn on the "Update remaining capacity" option in Bambu Studio:
   ![Bildschirmfoto 2025-01-16 um 18 00 45](https://github.com/user-attachments/assets/fe6cf018-b211-4fd6-8931-1c895842d71b) ![Bildschirmfoto 2025-01-16 um 18 01 44](https://github.com/user-attachments/assets/23c60d83-e5ed-41af-9fbc-24cc9dd8ede7)
 
@@ -73,7 +75,11 @@ The architectures supported by this image are:
               "ip": "192.168.1.X"
           }
       ]
-     ``` 
+     ```
+   | Attributes | Printer |
+   | :--------: | :-----: |
+   | id         | Serial from Printer |
+   | code       | AccessCode from Printer |
 
 2. Run the container:
    ```bash
@@ -271,8 +277,9 @@ Extra Field "tag" successfully created!
 ```
 
 ## Web UI
-Main Menu:
-![Bildschirmfoto 2025-01-19 um 22 23 50](https://github.com/user-attachments/assets/a648f96d-42d2-4c7b-ac36-55ea86ca9b65)
+Main Menu with loaded Bambu Lab Spools, 3rd Party Spools and empty Slots :
+![image](https://github.com/user-attachments/assets/4c7f3cfa-cfa7-49f9-82b6-1f6a77fe4f09)
+
 
 Menubar for seletion Printers, Logs or change Dark-/Lightmode:
 ![image](https://github.com/user-attachments/assets/c93c95bf-551b-459e-ae8b-b027b37b067d)
