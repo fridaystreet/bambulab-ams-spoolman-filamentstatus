@@ -301,4 +301,13 @@ Q: I can not handle my Bambu Lab dual or gradient color Spools with this service
 A: For this filaments i don't have data to check how I can process it. Please send me some logs, so I can implement it!
 
 ## Things and Features I'm Working on
- - make the code more stable
+
+| Type | Feature/Bug | Available in dev build | Available in latest release | Status/Info |
+|------|-------------|------------------------|-----------------------------|-------------|
+| Bug | Multiple creation of filaments and spools | ❌ | ❌ | implemented and will be tested |
+| Bug | False merging of Spools | ❌ | ❌ | implemented and will be tested [Issue 16](https://github.com/Rdiger-36/bambulab-ams-spoolman-filamentstatus/issues/16) |
+| Bug | Cannot read properties of undefined (reading 'extra') | ❌ | ❌ | implemented and will be tested [Issue 17](https://github.com/Rdiger-36/bambulab-ams-spoolman-filamentstatus/issues/17) |
+| Bug | Loosing connection and reconnection problems | ❌ | ❌ | - |
+| Bug | Cut Filament type from color names on website | ❌ | ❌ | implemented and will be tested [Issue 14](https://github.com/Rdiger-36/bambulab-ams-spoolman-filamentstatus/issues/14#issuecomment-2620597730)|
+| Feature | Background Spoolman connection check | ❌ | ❌ | - |
+| Bug | Sometimes the footer overlaps the table or other parts of the website | ❌ | ❌ | - |
