@@ -287,10 +287,6 @@ Menubar for seletion Printers, Logs or change Dark-/Lightmode:
 Logs can be accessed over the Backend Logs Menubutton (it only display the logs of the selected Printer from the Main Menu):
 ![Bildschirmfoto 2025-01-19 um 22 38 12](https://github.com/user-attachments/assets/848e35de-ad8a-4826-8264-6a21f5070765)
 
-
-## Support Me
-[![Buy Me a Coffee](https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png)](https://www.buymeacoffee.com/Rdiger36)
-
 ## FAQ
 Q: I can not merge my existing Spool to Spoolman. I can only create a new Spool or the container creates it automatically.
 
@@ -311,3 +307,6 @@ A: For this filaments i don't have data to check how I can process it. Please se
 | Bug | Cut Filament type from color names on website | ❌ | ❌ | implemented and will be tested [Issue 14](https://github.com/Rdiger-36/bambulab-ams-spoolman-filamentstatus/issues/14#issuecomment-2620597730)|
 | Feature | Background Spoolman connection check | ❌ | ❌ | - |
 | Bug | Sometimes the footer overlaps the table or other parts of the website | ❌ | ❌ | - |
+
+## Support Me
+[![Buy Me a Coffee](https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png)](https://www.buymeacoffee.com/Rdiger36)
