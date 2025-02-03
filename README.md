@@ -307,6 +307,7 @@ A: For this filaments i don't have data to check how I can process it. Please se
 | Bug | Cut Filament type from color names on website | ❌ | ❌ | implemented and will be tested [Issue 14](https://github.com/Rdiger-36/bambulab-ams-spoolman-filamentstatus/issues/14#issuecomment-2620597730)|
 | Feature | Background Spoolman connection check | ❌ | ❌ | - |
 | Bug | Sometimes the footer overlaps the table or other parts of the website | ❌ | ❌ | - |
+| Feature | commandline tool to debug connection to the printers (Ping and MQTT Connection) | ❌ | ❌ | implemented and will be tested [Issue 18](https://github.com/Rdiger-36/bambulab-ams-spoolman-filamentstatus/issues/18) |
 
 ## Support Me
 [![Buy Me a Coffee](https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png)](https://www.buymeacoffee.com/Rdiger36)
