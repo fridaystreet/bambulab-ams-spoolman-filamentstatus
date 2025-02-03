@@ -1,7 +1,15 @@
+Version 1.0.2-Dev
+   - Added a script for the command line to check the main functionalities of the stored printers
+      - connect to your interbal docker container like this: docker exec -it NAME_OF_YOU_CONTAINER /bin/sh
+        now execute the command "debug-printers"
+   - Fixed multiple creations of filaments and spools
+   - Fixed false merging of spools if there are multiple spools loaded with the same silament and different serials
+   - Fixed error: Cannot read properties of undefined (reading 'extra')
+   - Changed color filed behavior: all materials will nit be displayed in color field
 -----------------------------------------------------------------------------------------------
 Version 1.0.1
-   - Add footer to Main Menu
-   - Remove "Support for..." and "For AMS" from color field
+   - Added footer to Main Menu
+   - Changed color filed behavior: remove "Support for..." and "For AMS" from color field
    - Changed data display behavior in Main Menu
       - From now on, the displayed data will be read from the spool of Spoolman instead of using the external filament database as a source.
         This means that the filament can also be adjusted if there are any problems or errors
