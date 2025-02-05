@@ -96,21 +96,24 @@ The architectures supported by this image are:
    
    or as Docker Compose:
    ```bash
-   version: '3.8'
-    services:
-      bambulab-ams-spoolman-filamentstatus:
-        image: ghcr.io/rdiger-36/bambulab-ams-spoolman-filamentstatus:latest
-        container_name: bambulab-ams-spoolman-filamentstatus
-        ports:
-          - 4000:4000
-        environment:
-          - SPOOLMAN_IP=<spoolman_ip_address>
-          - SPOOLMAN_PORT=<spoolman_port>
-          - UPDATE_INTERVAL=120000
-          - MODE=automatic
-        volumes:
-          - /path/to/your/config/printers:/app/printers
-        restart: unless-stopped
+  services:
+    bambulab-ams-spoolman-filamentstatus:
+      image: ghcr.io/rdiger-36/bambulab-ams-spoolman-filamentstatus:latest
+      container_name: bambulab-ams-spoolman-filamentstatus
+      depends_on:
+        spoolman:
+          condition: service_started
+          restart: true
+      ports:
+        - 4000:4000
+      environment:
+        - SPOOLMAN_IP=<spoolman_ip_address>
+        - SPOOLMAN_PORT=<spoolman_port>
+        - UPDATE_INTERVAL=120000
+        - MODE=automatic
+      volumes:
+        - /path/to/your/config/printers:/app/printers
+      restart: unless-stopped
    ```
 
 ## Environment Variables
