@@ -96,7 +96,7 @@ The architectures supported by this image are:
    
    or as Docker Compose:
    ```bash
-  services:
+   services:
     bambulab-ams-spoolman-filamentstatus:
       image: ghcr.io/rdiger-36/bambulab-ams-spoolman-filamentstatus:latest
       container_name: bambulab-ams-spoolman-filamentstatus
