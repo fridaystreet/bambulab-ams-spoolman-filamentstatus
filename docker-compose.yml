@@ -1,0 +1,31 @@
+services:
+  spoolman:
+    image: ghcr.io/donkie/spoolman:latest
+    restart: unless-stopped
+    volumes:
+      # Mount the host machine's ./data directory into the container's /home/app/.local/share/spoolman directory
+      - type: bind
+        source: ./data # This is where the data will be stored locally. Could also be set to for example `source: /home/pi/printer_data/spoolman`.
+        target: /home/app/.local/share/spoolman # Do NOT modify this line
+    ports:
+      # Map the host machine's port 7912 to the container's port 8000
+      - "7912:8000"
+    environment:
+      - TZ=Australia/Perth # Optional, defaults to UTC
+  bambulab-ams-spoolman-filamentstatus:
+    image: ghcr.io/rdiger-36/bambulab-ams-spoolman-filamentstatus:latest
+    container_name: bambulab-ams-spoolman-filamentstatus
+    depends_on:
+      spoolman:
+        condition: service_started
+        restart: true
+    ports:
+      - "4001:4000"
+    environment:   
+      - SPOOLMAN_IP=spoolman
+      - SPOOLMAN_PORT=8000
+      - UPDATE_INTERVAL=30000
+      - MODE=manual
+    volumes:
+      - ./printers:/app/printers
+    restart: unless-stopped
